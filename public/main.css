@@ -1,8 +1,53 @@
 body{
   background-color: #e5e5e5;
 }
-#warapper{
-  width: 600px;
+#wrapper{
+  width: 700px;
   margin: auto;
   padding: 4px;
+}
+.left{
+  width: 30%;
+  background-color: #4b86e5;
+}
+.right{
+  width: 70%;
+  background-color: #f9fbff;
+}
+.left, .right{
+  min-height: 500px;
+  float: left;
+  margin-top: 10px;
+}
+.block{
+  width: 100%;
+  clear: both;
+}
+#txtMessage, #btnChat{
+  float: left;
+  margin: 2px;
+}
+#txtMessage{
+  width: 70%;
+}
+#btnChat{
+  width: 25%;
+}
+.title{
+  background-color: #efe770;
+  text-align: center;
+  padding: 5px;
+}
+.userOnline{
+  text-align: center;
+  border: 1px;
+}
+.userName{
+  color: red;
+  font-weight: bold;
+}
+#listMessage{
+  height: 470px;
+  overflow: scroll;
+  clear: both;
 }
