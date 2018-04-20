@@ -1,5 +1,6 @@
 var express = require("express");
 var app = express();
+var session = require('express-session');
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -33,7 +34,9 @@ io.on("connection", function(socket){
   });
   //recieve event user_buscu_user
   socket.on("user_buscu_user", function(data){
+    if (data !== socket.Username){
       io.to(data).emit("server_send_buscu_user", socket.Username);
+    }
   });
 });
 

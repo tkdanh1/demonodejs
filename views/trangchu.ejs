@@ -4,7 +4,7 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="jquery-3.3.1.min.js"></script>
   <script>
-  var socket = io("http://localhost:3030");
+  var socket = io("http://10.0.0.26:3030");
 
   //client recieves respone from server_send_fail_register
   socket.on("server_send_fail_register", function(user){
