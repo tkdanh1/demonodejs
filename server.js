@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 
-const user = require('./routers/user.route');
+const router = require('./routers/register.route');
 const app = express();
 const PORT = 3030;
 
@@ -27,25 +27,25 @@ app.use(session({
 var server = require("http").Server(app);
 var io = require('socket.io')(server);
 server.listen(PORT);
-
+var sess;
 // user routers
-app.use('/user', user);
+app.use('/register', router);
 //handle post method
-app.post('/user', function(req, res){
+app.post('/register', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
   console.log('username: ' + username + ' password: ' + password);
 
-  var sess = req.session;
+  sess = req.session;
   sess.username = username;
   sess.password = password;
 
   if(sess.username === 'admin' && sess.password === 'admin'){
     res.redirect('/trangchu');
   }else{
-    res.redirect('/login');
+    res.redirect('/register');
   }
-  res.end('yes');
+
 });
 
 var arrUserOnline = [];
@@ -84,9 +84,13 @@ io.on("connection", function(socket){
     }
   });
 });
-app.get('/login', function(req, res){
-  res.render('login');
+app.get('/register', function(req, res){
+  res.render('register');
 });
 app.get("/trangchu", function(req, res){
-  res.render('trangchu');
+  if(sess === undefined){
+    res.redirect('/register');
+  }else{
+    res.render('trangchu');
+  }
 });
