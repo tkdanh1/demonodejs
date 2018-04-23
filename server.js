@@ -36,14 +36,15 @@ app.post('/user', function(req, res){
   var password = req.body.password;
   console.log('username: ' + username + ' password: ' + password);
 
-  sess = req.session;
+  var sess = req.session;
   sess.username = username;
   sess.password = password;
 
   if(sess.username === 'admin' && sess.password === 'admin'){
     res.redirect('/trangchu');
+  }else{
+    res.redirect('/login');
   }
-
   res.end('yes');
 });
 
@@ -83,13 +84,9 @@ io.on("connection", function(socket){
     }
   });
 });
-
+app.get('/login', function(req, res){
+  res.render('login');
+});
 app.get("/trangchu", function(req, res){
-  sess = req.session;
-  if(sess.username){
-      res.render("trangchu");
-  }else{
-    res.redirect('/login');
-  }
-
+  res.render('trangchu');
 });
