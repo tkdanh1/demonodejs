@@ -30,11 +30,25 @@ socket.on("server_send_message", function(data){
 //user buscu another user
 socket.on("server_send_buscu_user", function(data){
   alert(data + " muốn buscu bạn!");
+
+});
+//empty user
+socket.on("server_send_emty_user", function(){
+  alert("Please input a valid username!");
+  $("#txtUser").val("");
 });
   $(document).ready(function(){
     $("#btnRegister").click(function(){
       //send to server
       socket.emit("client_send_username", $("#txtUser").val());
+    });
+    // handle event when user press Enter
+    var input = document.getElementById("txtMessage");
+    input.addEventListener("keyup", function(event){
+      event.preventDefault();
+      if (event.keyCode === 13) {
+        document.getElementById("btnChat").click();
+      }
     });
     $("#btnChat").click(function(){
       //send message to server
